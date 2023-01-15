@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block metadescription %}
+{% endblock %}
+
+{% block title %} Register {% endblock %}
+
+
+{% block body %}
+
+<div class="register-form">
+
+    <form action="" method="POST">
+        <div class="heading">
+            <h2>Register</h2>
+        </div>
+        {% for message in messages %}
+        <div class="messages">
+            <h4 style="color: red; font-size: 1.5rem;">{{ message }}</h4>
+        </div>
+        {% endfor %}
+        {% csrf_token %}
+
+        <label class="form-label">Username</label>
+        <input class="form-control" type="text" name="username" placeholder="Type a Username (Only letters and numbers)"
+            required>
+        <br>
+        <label class="form-label">Email</label>
+        <input class="form-control" type="email" name="email" placeholder="Enter your email" required>
+        <br>
+        <label class="form-label">Password</label>
+        <input class="form-control" type="password" name="password" placeholder="Enter password" required>
+        <br>
+        <label class="form-label">Confirm Password</label>
+        <input class="form-control" type="password" name="re_password" placeholder="Confirm password" required>
+        <br>
+        <div class="d-grid">
+            <button class="btn btn-primary" type="submit">SignUp</button>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

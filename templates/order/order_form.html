@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block metadescription %}
+{% endblock %}
+
+{% block title %} Order {% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluid order-form">
+
+    <div>
+
+        <form action="" method="POST" id="orderForm" data-courses-url="{% url 'order:ajax_load_courses' %}">
+            <div class="order-page">
+                {% csrf_token %}
+                <table class="table">
+                    {{ form.as_table }}
+                </table>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <a href="{% url 'authentication:sign_out' %}" class="btn btn-danger">LogOut</a>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="container-fluid shadow order-home">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="messages">
+                {{ message }}
+            </div>
+            {% endfor %}
+            <div class="order-summery">
+                <a href="{% url 'website:home' %}">Return to Home</a><br>
+                <a href="{% url 'order:order_form' %}">Order Again</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+<!---JQuery--->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+
+    $("#id_department").change(function () {
+        const url = $("#orderForm").attr("data-courses-url");  // get the url of the `load_courses` view
+        const departmentId = $(this).val();  // get the selected department ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-courses/ )
+            data: {
+                'department_id': departmentId       // add the department id to the GET parameters
+            },
+            success: function (data) {   // `data` is the return of the `load_courses` view function
+                $("#id_course").html(data);  // replace the contents of the course input with the data that came from the server
+
+            }
+        });
+
+    });
+
+</script>
+
+{% endblock %}

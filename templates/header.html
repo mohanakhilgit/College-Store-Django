@@ -1,0 +1,58 @@
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'website:home' %}">C-Store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'website:home' %}">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Department
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Biology"
+                                target="_blank">Biology Science</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Computer_science"
+                                target="_blank">Computer Science</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Commerce"
+                                target="_blank">Commerce</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Electronics"
+                                target="_blank">Electronics</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Humanities"
+                                target="_blank">Humanities</a>
+                        </li>
+                    </ul>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'authentication:sign_out' %}">LogOut</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'authentication:signin' %}">LogIn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                        href="{% url 'authentication:register' %}">Register</a>
+                </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>
